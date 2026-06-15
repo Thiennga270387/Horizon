@@ -2,24 +2,51 @@
   "ai": {
     "provider": "openai",
     "model": "gpt-4o-mini",
-    "api_key_env": "OPENAI_API_KEY"
+    "api_key_env": "OPENAI_API_KEY",
+    "languages": ["en"]
   },
 
   "sources": {
-    "rss": [
-      {
-        "name": "TechCrunch AI",
-        "url": "https://techcrunch.com/category/artificial-intelligence/feed/"
-      },
 
-      {
-        "name": "OpenAI Blog",
-        "url": "https://openai.com/blog/rss.xml"
-      }
+    "hackernews": {
+      "enabled": true,
+      "fetch_top_stories": 30,
+      "min_score": 200
+    },
+
+    "reddit": {
+      "enabled": true,
+      "subreddits": [
+        { "subreddit": "worldnews",   "sort": "hot", "time_filter": "day", "fetch_limit": 20, "min_score": 1000 },
+        { "subreddit": "news",        "sort": "hot", "time_filter": "day", "fetch_limit": 15, "min_score": 500  },
+        { "subreddit": "investing",   "sort": "hot", "time_filter": "day", "fetch_limit": 15, "min_score": 200  },
+        { "subreddit": "Catholicism", "sort": "hot", "time_filter": "day", "fetch_limit": 15, "min_score": 50   },
+        { "subreddit": "Economics",   "sort": "hot", "time_filter": "day", "fetch_limit": 10, "min_score": 200  }
+      ],
+      "fetch_comments": 3
+    },
+
+    "rss": [
+
+      { "name": "BBC World News",      "url": "http://feeds.bbci.co.uk/news/world/rss.xml",                        "category": "world"   },
+      { "name": "The Guardian World",  "url": "https://www.theguardian.com/world/rss",                             "category": "world"   },
+      { "name": "NYT World",           "url": "https://rss.nytimes.com/services/xml/rss/nyt/World.xml",            "category": "world"   },
+      { "name": "Al Jazeera",          "url": "https://www.aljazeera.com/xml/rss/all.xml",                         "category": "world"   },
+
+      { "name": "CNBC Top News",       "url": "https://www.cnbc.com/id/100003114/device/rss/rss.html",             "category": "finance" },
+      { "name": "MarketWatch",         "url": "https://feeds.marketwatch.com/marketwatch/topstories/",             "category": "finance" },
+      { "name": "Investing.com",       "url": "https://www.investing.com/rss/news_25.rss",                         "category": "finance" },
+      { "name": "Bloomberg Markets",   "url": "https://feeds.bloomberg.com/markets/news.rss",                      "category": "finance" },
+
+      { "name": "Vatican News",        "url": "https://www.vaticannews.va/en/rss.xml",                             "category": "catholic"},
+      { "name": "Catholic News Agency","url": "https://www.catholicnewsagency.com/feed",                           "category": "catholic"},
+      { "name": "Nat. Catholic Register","url": "https://www.ncregister.com/rss",                                  "category": "catholic"},
+      { "name": "EWTN News",           "url": "https://www.ewtnnews.com/rss/",                                     "category": "catholic"}
     ]
   },
 
   "filtering": {
-    "ai_score_threshold": 6.0
+    "ai_score_threshold": 6.0,
+    "time_window_hours": 24
   }
 }
